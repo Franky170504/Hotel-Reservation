@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation Prediction</title>
+    <style>
+        /* Basic styling for a clean look */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Style for all input and select fields */
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box; /* Important for 100% width */
+            font-size: 1rem;
+        }
+
+        /* Specific focus style for accessibility */
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hotel Reservation Prediction</h2>
+        
+        <form method="POST">
+            
+            <div class="form-group">
+                <label for="lead_time">Lead Time (Days)</label>
+                <input type="number" id="lead_time" name="lead_time" placeholder="e.g., 30" required>
+            </div>
+
+            <div class="form-group">
+                <label for="no_of_special_request">Special Requests</label>
+                <input type="number" id="no_of_special_request" name="no_of_special_request" placeholder="e.g., 1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="avg_price_per_room">Average Price per Room</label>
+                <input type="number" id="avg_price_per_room" name="avg_price_per_room" placeholder="e.g., 120.50" step="0.01" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="arrival_month">Arrival Month</label>
+                        <select id="arrival_month" name="arrival_month" required>
+                            <option value="" disabled selected>Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="arrival_date">Arrival Date</label>
+                        <input type="number" id="arrival_date" name="arrival_date" min="1" max="31" placeholder="1-31" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="market_segment_type">Market Segment</label>
+                <select id="market_segment_type" name="market_segment_type" required>
+                    <option value="" disabled selected>Select a segment...</option>
+                    <option value="0">Aviation</option>
+                    <option value="1">Complementary</option>
+                    <option value="2">Corporate</option>
+                    <option value="3">Offline</option>
+                    <option value="4">Online</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="no_of_week_nights">Weekday Nights</label>
+                <input type="number" id="no_of_week_nights" name="no_of_week_nights" placeholder="e.g., 2" required>
+            </div>
+
+            <div class="form-group">
+                <label for="no_of_weekend_nights">Weekend Nights</label>
+                <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" placeholder="e.g., 1" required>
+            </div>
+                 
+            <div class="form-group">
+                <label for="type_of_meal_plan">Meal Plan</label>
+                <select id="type_of_meal_plan" name="type_of_meal_plan" required>
+                    <option value="" disabled selected>Select a meal plan...</option>
+                    <option value="0">Meal Plan 1</option>
+                    <option value="1">Meal Plan 2</option>
+                    <option value="2">Meal Plan 3</option>
+                    <option value="3">Meal Plan 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="room_type_reserved">Room Type</label>
+                <select id="room_type_reserved" name="room_type_reserved" required>
+                    <option value="" disabled selected>Select a room type...</option>
+                    <option value="0">Room_Type 1</option>
+                    <option value="1">Room_Type 2</option>
+                    <option value="2">Room_Type 3</option>
+                    <option value="3">Room_Type 4</option>
+                    <option value="4">Room_Type 5</option>
+                    <option value="5">Room_Type 6</option>
+                    <option value="6">Room_Type 7</option>
+                    </select>
+            </div>
+       
+            <div class="form-group">
+                <button type="submit">Predict Reservation Status</button>
+            </div>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            {% if prediction == 0 %}
+            <p>Customer is going to cancel the reservation</p>
+            {% elif prediction == 1 %}
+            <p>Customer is not going to cancel the reservation</p>
+            {% endif %}
+        </div>
+        {% endif %}
+            
+    </div>
+</body>
+</html>

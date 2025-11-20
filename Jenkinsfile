@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment{
+        GCP_PROJECT = "mlops-1-476212"
+        GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk"
+    }
+
     stages {
         stage("Cloning github repo to jenkins") {
             steps {
@@ -40,6 +45,31 @@ pipeline {
                 '''
             }
             
+        }
+
+        stage('Buidling and Pushing Docker Image to GCR'){
+            steps{
+                withCredentials([file(credentialsId : 'gcp-key-hotel', variable: 'GOOGLE_APP_CREDENTIALS')]){
+                    script{
+                        echo 'Buidling and Pushing Docker Image to GCR.............'
+                        sh '''
+                        export PATH=$PATH:$(GCLOUD_PATH)
+
+                        gcloud auth activate-service-account --key-files=${GOOGLE_APP_CREDENTIALS}
+
+                        gclod config set project ${GCP_PROJECT}
+
+                        gcloud auth configure-docker --quiet
+
+                        docker biuld -t gcr.io/${GCP_PROJECT}/mlops-1:latest .
+
+                        docker push gcr.io/${GCP_PROJECT}/mlops-1:latest 
+
+
+                        '''
+                    }
+                }
+            }
         }
 
     }

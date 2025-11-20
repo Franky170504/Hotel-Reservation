@@ -19,26 +19,24 @@ pipeline {
                     
                     # 1. UPDATE THIS PATH TO YOUR CONDA INSTALLATION
                     # This is the path you asked to be marked
-                    source C:/Users/LaukikS/anaconda3/condabin/conda.sh
+                    source /opt/conda/etc/profile.d/conda.sh
                     
                     echo "--- Activating Conda Environment: ml-dl-env ---"
                     # I'm using 'ml-dl-env' since I saw it in your prompt
+                    echo "--- Creating/Activating Environment ---"
+                    # Since this is a fresh container, we might need to create the env first
+                    # If env exists, this line skips. If not, it creates it.
+                    conda create -n ml-dl-env python=3.9 -y || true
+
                     conda activate ml-dl-env
                     
-                    echo "--- Verifying Environment ---"
-                    which python
-                    python --version
-                    
-                    echo "--- Installing requirements ---"
-                    # This command will now run inside your Conda env
+                    # Ensure pip is installed
+                    conda install pip -y
                     pip install -r requirements.txt
-                    
-                    echo "--- Running Project Steps ---"
-                    # Add any other build/test commands here
-                    # For example: python your_script.py
-                    
-                    echo "--- Deactivating ---"
-                    conda deactivate
+                                                            
+                    echo "--- Running Project ---"
+                    python --version
+                    # Add your python run command here
                 '''
             }
             

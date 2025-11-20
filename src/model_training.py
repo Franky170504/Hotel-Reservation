@@ -20,10 +20,9 @@ import mlflow.sklearn
 logger = get_logger(__name__)
 
 class ModelTraining:
-    def __init__(self, train_path, test_path, model_output_dir, model_output_path):
+    def __init__(self, train_path, test_path, model_output_path):
         self.train_path = train_path
         self.test_path = test_path
-        self.model_output_dir = model_output_dir
         self.model_output_path = model_output_path
 
         self.model_params_dict = LIGHTGBM_PARAMS
@@ -114,10 +113,10 @@ class ModelTraining:
     def save_model(self, model):
         try:
             os.makedirs(os.path.dirname(self.model_output_path),exist_ok=True)
-            model_path = os.path.join(self.model_output_path, "lightgbm.pkl")
+            # model_path = os.path.join(self.model_output_path, "lightgbm.pkl")
             logger.info("Saving the model")
 
-            joblib.dump(model,model_path)
+            joblib.dump(model,self.model_output_path)
 
             logger.info(f"Model Saved at {self.model_output_path}")
         
@@ -155,5 +154,5 @@ class ModelTraining:
             raise CustomException("Error while running model training pipeline", e)
                    
 if __name__ == "__main__":
-    trainer = ModelTraining(PROCESSED_TRAIN_FILE_PATH, PROCESSED_TEST_FILE_PATH, MODEL_OUTPUT_DIR, MODEL_OUTPUT_PATH)
+    trainer = ModelTraining(PROCESSED_TRAIN_FILE_PATH, PROCESSED_TEST_FILE_PATH, MODEL_OUTPUT_PATH)
     trainer.run()

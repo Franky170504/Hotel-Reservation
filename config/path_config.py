@@ -18,5 +18,5 @@ PROCESSED_TEST_FILE_PATH = os.path.join(PROCESSED_DIR,"test.csv")
 
 ## Model Path ##
 
-MODEL_OUTPUT_DIR = r"artifacts/models"
-MODEL_OUTPUT_PATH = os.path.join(MODEL_OUTPUT_DIR,"lightgbm.pkl")
+MODEL_OUTPUT_PATH = r"artifacts/models/lightgbm.pkl"
+# MODEL_OUTPUT_PATH = os.path.join(MODEL_OUTPUT_DIR,"")

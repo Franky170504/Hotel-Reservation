@@ -55,7 +55,7 @@ pipeline {
                         sh '''
                         export PATH=$PATH:${GCLOUD_PATH}
 
-                        gcloud auth activate-service-account --key-files=${GOOGLE_APP_CREDENTIALS}
+                        gcloud auth activate-service-account --key-file=${GOOGLE_APP_CREDENTIALS}
 
                         gclod config set project ${GCP_PROJECT}
 

@@ -19,7 +19,7 @@ pipeline {
                     
                     # 1. UPDATE THIS PATH TO YOUR CONDA INSTALLATION
                     # This is the path you asked to be marked
-                    source /opt/conda/etc/profile.d/conda.sh
+                    . /opt/conda/etc/profile.d/conda.sh
                     
                     echo "--- Activating Conda Environment: ml-dl-env ---"
                     # I'm using 'ml-dl-env' since I saw it in your prompt

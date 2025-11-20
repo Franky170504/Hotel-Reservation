@@ -17,8 +17,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy the application code
 COPY . .
 
+ENV PYTHONPATH=/app
 # Install the package in editable mode
 RUN pip install --no-cache-dir -e .
+
+
 
 # Train the model before running the application
 RUN python pipeline/training_pipeline.py
